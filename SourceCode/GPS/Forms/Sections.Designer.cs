@@ -54,7 +54,6 @@ namespace AgOpenGPS
 
                     //add current track when it doesn't exist in the worked track list
                     MarkAsWorkedTrack();
-
                     break;
 
                 case btnStates.On:
@@ -62,13 +61,13 @@ namespace AgOpenGPS
                     btnSectionMasterManual.Image = Properties.Resources.ManualOff;
                     break;
             }
-
             //go set the butons and section states
             if (tool.isSectionsNotZones)
                 AllSectionsAndButtonsToState(manualBtnState);
             else
                 AllZonesAndButtonsToState(manualBtnState);
         }
+
         private void btnSectionMasterAuto_Click(object sender, EventArgs e)
         {
             //turn off manual if on
@@ -77,20 +76,16 @@ namespace AgOpenGPS
 
             switch (autoBtnState)
             {
-
                 case btnStates.Off:
-
                     autoBtnState = btnStates.Auto;
                     btnSectionMasterAuto.Image = Properties.Resources.SectionMasterOn;
                     if (sounds.isSectionsSoundOn) sounds.sndSectionOn.Play();
 
                     //add current track when it doesn't exist in the worked track list
                     MarkAsWorkedTrack();
-
                     break;
 
                 case btnStates.Auto:
-
                     autoBtnState = btnStates.Off;
                     btnSectionMasterAuto.Image = Properties.Resources.SectionMasterOff;
                     if (sounds.isSectionsSoundOn) sounds.sndSectionOn.Play();
@@ -156,7 +151,6 @@ namespace AgOpenGPS
                 case btnStates.Auto:
                     button.BackColor = isDay ? Color.Lime : Color.ForestGreen;
                     break;
-
                 case btnStates.On:
                     button.BackColor = isDay ? Color.Yellow : Color.DarkGoldenrod;
                     break;
@@ -288,7 +282,6 @@ namespace AgOpenGPS
             int top = 130;
 
             int buttonMaxWidth = 400, buttonHeight = 30;
-
 
             if ((Height - oglMain.Height) < 80) //max size - buttons hid
             {
@@ -514,13 +507,11 @@ namespace AgOpenGPS
 
                 p_254.pgn[p_254.sc1to8] = p_229.pgn[p_229.sc1to8];
                 p_254.pgn[p_254.sc9to16] = p_229.pgn[p_229.sc9to16];
-
             }
 
             p_239.pgn[p_239.speed] = unchecked((byte)(avgSpeed * 10));
             p_239.pgn[p_239.tram] = unchecked((byte)tram.controlByte);
         }
-
 
         private void DoRemoteSwitches()
         {
@@ -572,24 +563,12 @@ namespace AgOpenGPS
                     {
                         if (((mc.ss[mc.swOnGr0] & (1 << i)) == (1 << i)) && (tool.numOfSections > i))
                         {
-                            if (section[i].sectionBtnState != btnStates.Auto)
-                            {
-                                section[i].sectionBtnState = btnStates.Auto;
-                            }
+                            section[i].sectionBtnState = btnStates.Auto;
                             PerformSectionClick(i);
                         }
                     }
-                    mc.ssP[mc.swOnGr0] = mc.ss[mc.swOnGr0];
-
-                } //if swONLo != 0 
-                else
-                {
-                    if (mc.ssP[mc.swOnGr0] != 0)
-                    {
-                        mc.ssP[mc.swOnGr0] = 0;
-                    }
                 }
-
+                mc.ssP[mc.swOnGr0] = mc.ss[mc.swOnGr0];
 
                 if (mc.ss[mc.swOnGr1] != 0)
                 {
@@ -598,23 +577,12 @@ namespace AgOpenGPS
                     {
                         if (((mc.ss[mc.swOnGr1] & (1 << i)) == (1 << i)) && (tool.numOfSections > i + 8))
                         {
-                            if (section[i + 8].sectionBtnState != btnStates.Auto)
-                            {
-                                section[i + 8].sectionBtnState = btnStates.Auto;
-                            }
+                            section[i + 8].sectionBtnState = btnStates.Auto;
                             PerformSectionClick(i + 8);
                         }
                     }
-                    mc.ssP[mc.swOnGr1] = mc.ss[mc.swOnGr1];
-
-                } //if swONHi != 0   
-                else
-                {
-                    if (mc.ssP[mc.swOnGr1] != 0)
-                    {
-                        mc.ssP[mc.swOnGr1] = 0;
-                    }
                 }
+                mc.ssP[mc.swOnGr1] = mc.ss[mc.swOnGr1];
 
                 // Switches have changed
                 if (mc.ss[mc.swOffGr0] != mc.ssP[mc.swOffGr0])
@@ -661,8 +629,7 @@ namespace AgOpenGPS
                             PerformSectionClick(i);
                         }
                     }
-
-                } // if swOFFLo !=0
+                }
 
                 if (mc.ss[mc.swOffGr1] != 0)
                 {
@@ -675,7 +642,7 @@ namespace AgOpenGPS
                             PerformSectionClick(i + 8);
                         }
                     }
-                } // if swOFFHi !=0
+                }
             }
             else// zones to on
             {
@@ -692,15 +659,8 @@ namespace AgOpenGPS
                             }
                         }
                     }
-                    mc.ssP[mc.swOnGr0] = mc.ss[mc.swOnGr0];
                 }
-                else
-                {
-                    if (mc.ssP[mc.swOnGr0] != 0)
-                    {
-                        mc.ssP[mc.swOnGr0] = 0;
-                    }
-                }
+                mc.ssP[mc.swOnGr0] = mc.ss[mc.swOnGr0];
 
                 // zones to auto
                 if (mc.ss[mc.swOffGr0] != mc.ssP[mc.swOffGr0])
@@ -775,7 +735,6 @@ namespace AgOpenGPS
                         }
                     }
                 }
-
                 if (mc.ss[mc.swOnGr0] != 0)
                 {
                     // ON Signal from Arduino Gr0
@@ -800,7 +759,6 @@ namespace AgOpenGPS
                         }
                     }
                 }
-
 
                 if (mc.ss[mc.swOffGr0] != 0)
                 {
@@ -839,9 +797,7 @@ namespace AgOpenGPS
                             PerformZoneClick(i);
                         }
                     }
-
                 }
-
                 // zones to on
                 if (mc.ss[mc.swOnGr0] != 0)
                 {
@@ -851,11 +807,9 @@ namespace AgOpenGPS
                         {
                             section[tool.zoneRanges[i + 1] - 1].sectionBtnState = btnStates.Auto;
                             PerformZoneClick(i);
-
                         }
                     }
                 }
-
                 // zones to off
                 if (mc.ss[mc.swOffGr0] != 0)
                 {
@@ -870,7 +824,6 @@ namespace AgOpenGPS
                 }
             }
         }
-
 
         private void PerformZoneClick(int Btn)
         {
