@@ -135,9 +135,9 @@ namespace AgOpenGPS
         //Section buttons************************8
         public void AllSectionsAndButtonsToState(btnStates state)
         {
-            for (int i = 1; i <= 16; i++)
+            for (int i = 0; i < 16; i++)
             {
-                IndividualSectionAndButonToState(state, i - 1, this.Controls.Find("btnSection" + i.ToString() + "Man", true).First() as Button);
+                IndividualSectionAndButonToState(state, i, FindSectionButton(i));
             }
         }
 
@@ -166,14 +166,18 @@ namespace AgOpenGPS
 
         public void HideSections()
         {
-            for (int i = 1; i <= 16; i++)
-                (this.Controls.Find("btnSection" + i.ToString() + "Man", true).First() as Button).Visible = false;
+            for (int i = 0; i < 16; i++)
+            {
+                FindSectionButton(i).Visible = false;
+            }
         }
 
         public void HideZones()
         {
-            for (int i = 1; i <= 8; i++)
-                (this.Controls.Find("btnZone" + i.ToString(), true).First() as Button).Visible = false;
+            for (int i = 0; i < 8; i++)
+            {
+                FindZoneButton(i).Visible = false;
+            }
         }
 
         public void LineUpIndividualSectionBtns()
@@ -220,21 +224,22 @@ namespace AgOpenGPS
                 int buttonWidth = Math.Min(oglButtonWidth / tool.numOfSections, buttonMaxWidth);
 
                 Size size = new System.Drawing.Size(buttonWidth, buttonHeight);
-                for (int i = 1; i <= 16; i++)
+                Button previousButton = null;
+                for (int i = 0; i < 16; i++)
                 {
-                    Button btn = this.Controls.Find("btnSection" + i.ToString() + "Man", true).First() as Button;
-                    btn.Size = size;
-                    btn.Top = top;
-                    if (i == 1)
+                    Button button = FindSectionButton(i);
+                    button.Size = size;
+                    button.Top = top;
+                    if (i == 0)
                     {
-                        btnSection1Man.Left = (oglCenter) - (tool.numOfSections * btnSection1Man.Size.Width) / 2;
+                        button.Left = (oglCenter) - (tool.numOfSections * btnSection1Man.Size.Width) / 2;
                     }
                     else
                     {
-                        Button btnPrev = this.Controls.Find("btnSection" + (i - 1).ToString() + "Man", true).First() as Button;
-                        btn.Left = btnPrev.Left + btnPrev.Size.Width;
+                        button.Left = previousButton.Left + previousButton.Size.Width;
                     }
-                    btn.Visible = tool.numOfSections > (i - 1);
+                    button.Visible = i < tool.numOfSections;
+                    previousButton = button;
                 }
 
             }
@@ -253,7 +258,7 @@ namespace AgOpenGPS
                     IndividualZoneAndButtonToState(state,
                         tool.zoneRanges[i - 1],
                         tool.zoneRanges[i],
-                        this.Controls.Find("btnZone" + i.ToString(), true).First() as Button
+                        FindZoneButton(i - 1)
                     );
                 }
             }
@@ -306,28 +311,23 @@ namespace AgOpenGPS
             int oglButtonWidth = oglMain.Width * 3 / 4;
             int buttonWidth = Math.Min(oglButtonWidth / tool.zones,buttonMaxWidth);
             Size size = new System.Drawing.Size(buttonWidth, buttonHeight);
-
-            for (int i = 1; i <= 8; i++)
+            Button previousButton = null;
+            for (int i = 0; i < 8; i++)
             {
-                Button btn = this.Controls.Find("btnZone" + i.ToString(), true).First() as Button;
-                btn.Visible = tool.zones > (i - 1);
-                btn.Top = top;
-                btn.Size = size;
-                if (isJobStarted)
+                Button button = FindZoneButton(i);
+                button.Visible = i < tool.zones;
+                button.Top = top;
+                button.Size = size;
+                button.BackColor = isJobStarted ? Color.Red : Color.Silver;
+                if (i == 0)
                 {
-                    btn.BackColor = Color.Red;
-                } else
-                {
-                    btn.BackColor = Color.Silver;
-                }
-                if (i == 1)
-                {
-                    btn.Left = (oglCenter) - (tool.zones * btn.Size.Width) / 2;
+                    button.Left = (oglCenter) - (tool.zones * button.Size.Width) / 2;
                 }
                 else
                 {
-                    btn.Left = this.Controls.Find("btnZone" + (i - 1).ToString(), true).First().Left + btnZone1.Size.Width;
+                    button.Left = previousButton.Left + previousButton.Size.Width;
                 }
+                previousButton = button;
             }
         }
 
@@ -825,14 +825,24 @@ namespace AgOpenGPS
             }
         }
 
-        private void PerformZoneClick(int Btn)
+        private void PerformZoneClick(int buttonIndex)
         {
-            (this.Controls.Find("btnZone" + (Btn + 1).ToString(), true).First() as Button).PerformClick();
+            FindZoneButton(buttonIndex).PerformClick();
         }
 
-        private void PerformSectionClick(int Btn)
+        private void PerformSectionClick(int buttonIndex)
         {
-            (this.Controls.Find("btnSection" + (Btn + 1).ToString() + "Man", true).First() as Button).PerformClick();
+            FindSectionButton(buttonIndex).PerformClick();
+        }
+
+        private Button FindSectionButton(int buttonIndex)
+        {
+            return Controls.Find("btnSection" + (buttonIndex + 1).ToString() + "Man", true).First() as Button;
+        }
+
+        private Button FindZoneButton(int buttonIndex)
+        {
+            return Controls.Find("btnZone" + (buttonIndex + 1).ToString(), true).First() as Button;
         }
     }
 }
