@@ -1,5 +1,6 @@
 ﻿using AgOpenGPS.Core.Interfaces;
 using AgOpenGPS.Core.ViewModels;
+using AgOpenGPS.WpfApp.Configuration;
 using AgOpenGPS.WpfApp.Field;
 using System;
 using System.Windows;
@@ -8,10 +9,43 @@ namespace AgOpenGPS.WpfApp
 {
     public class WpfPanelPresenter : IPanelPresenter
     {
+        private ConfigMenuDialog _configMenuDialog;
+        private ConfigurationDialog _configurationDialog;
+
         private StartNewFieldDialog _startNewFieldDialog;
         private SelectNearFieldDialog _selectNearFieldDialog;
         private CreateFromExistingFieldDialog _createFromExistingFieldDialog;
         private SelectFieldDialog _selectFieldDialog;
+
+        public void ShowConfigMenuDialog(ConfigMenuViewModel viewModel)
+        {
+            _configMenuDialog = new ConfigMenuDialog
+            {
+                DataContext = viewModel
+            };
+            _configMenuDialog.ShowDialog();
+        }
+
+        public void CloseConfigMenuDialog()
+        {
+            _configMenuDialog?.Close();
+            _configMenuDialog = null;
+        }
+
+        public void ShowConfigurationDialog(ConfigurationViewModel viewModel)
+        {
+            _configurationDialog = new ConfigurationDialog
+            {
+                DataContext = viewModel
+            };
+            _configurationDialog.ShowDialog();
+        }
+
+        public void CloseConfigurationDialog()
+        {
+            _configurationDialog?.Close();
+            _configurationDialog = null;
+        }
 
         public void ShowStartNewFieldDialog(StartNewFieldViewModel viewModel)
         {

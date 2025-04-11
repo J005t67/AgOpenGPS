@@ -27,5 +27,10 @@ namespace AgOpenGPS.Core.Presenters
             PanelPresenter.ShowStartNewFieldDialog(viewModel);
         }
 
+        public void ShowConfigMenuDialog(ConfigMenuViewModel viewModel)
+        {
+            PanelPresenter.ShowConfigMenuDialog(viewModel);
+        }
+
     }
 }

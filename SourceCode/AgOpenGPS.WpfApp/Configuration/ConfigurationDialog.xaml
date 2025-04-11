@@ -1,0 +1,44 @@
+﻿<Window x:Class="AgOpenGPS.WpfApp.Configuration.ConfigurationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+    xmlns:corevm="clr-namespace:AgOpenGPS.Core.ViewModels;assembly=AgOpenGPS.Core"
+    xmlns:local="clr-namespace:AgOpenGPS.WpfApp.Configuration"
+
+    d:DataContext="{d:DesignInstance Type=corevm:ConfigurationViewModel, IsDesignTimeCreatable=False}"
+
+    Title="ConfigurationDialog" >
+
+    <DockPanel>
+        <StackPanel Width="120" DockPanel.Dock="Left">
+            <RadioButton x:Name="vehicleTypeRadioButton" IsChecked="{Binding VehicleTypeSelected}" Content="Vehicle Type"/>
+            <RadioButton x:Name="vehicleSizeRadioButton" IsChecked="{Binding VehicleSizeSelected}" Content="Vehicle Size"/>
+            <RadioButton x:Name="vehicleAntennaRadioButton" IsChecked="{Binding VehicleAntennaSelected}" Content="Vehicle Antennna"/>
+
+            <RadioButton x:Name="toolTypeRadioButton" IsChecked="{Binding ToolTypeSelected}" Content="Tool Type"/>
+            <RadioButton x:Name="toolSizeRadioButton" IsChecked="{Binding ToolSizeSelected}" Content="Tool Size"/>
+            <RadioButton x:Name="toolOffsetRadioButton" IsChecked="{Binding ToolOffsetSelected}" Content="Tool Offset"/>
+            <RadioButton x:Name="toolOverlapRadioButton" IsChecked="{Binding ToolOverlapSelected}" Content="Tool Overlap"/>
+            <RadioButton x:Name="toolSectionsRadioButton" IsChecked="{Binding ToolSectionsSelected}" Content="Tool Sections"/>
+            <RadioButton x:Name="toolLookAheadRadioButton" IsChecked="{Binding ToolLookAheadSelected}" Content="Tool Look Ahead"/>
+            <RadioButton x:Name="toolSwitchesRadioButton" IsChecked="{Binding ToolSwitchesSelected}" Content="Tool Switches"/>
+
+            <RadioButton x:Name="inputsAntennaRadioButton" IsChecked="{Binding InputsAntennaSelected}" Content="Inputs Antennna"/>
+            <RadioButton x:Name="inputsImuRadioButton" IsChecked="{Binding InputsImuSelected}" Content="Inputs IMU"/>
+
+            <RadioButton x:Name="turnRadioButton" IsChecked="{Binding TurnSelected}" Content="Turn"/>
+            <RadioButton x:Name="machineModuleRadioButton" IsChecked="{Binding MachineModuleSelected}" Content="MachineModule"/>
+            <RadioButton x:Name="switchesRadioButton" IsChecked="{Binding SwitchesSelected}" Content="Switches"/>
+            <RadioButton x:Name="tramLinesRadioButton" IsChecked="{Binding TramLinesSelected}" Content="TramLines"/>
+            <RadioButton x:Name="viewportRadioButton" IsChecked="{Binding ViewportSelected}" Content="Viewport"/>
+            <RadioButton x:Name="buttonsRadioButton" IsChecked="{Binding ButtonsSelected}" Content="Buttons"/>
+        </StackPanel>
+        
+        <Grid Height="50" DockPanel.Dock="Bottom" />
+        <local:ConfigPageArea />
+    </DockPanel>
+ 
+</Window>
+

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="AgOpenGPS.WpfApp.Configuration.ConfigTurnPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+
+    xmlns:corevm="clr-namespace:AgOpenGPS.Core.ViewModels;assembly=AgOpenGPS.Core"
+    xmlns:local="clr-namespace:AgOpenGPS.WpfApp.Configuration"
+
+    d:DataContext="{d:DesignInstance Type=corevm:ConfigTurnViewModel, IsDesignTimeCreatable=False}"
+    d:DesignHeight="742" d:DesignWidth="1076">
+
+    <Grid Background="#500050">
+        <TextBlock Text="ConfigTurnPage" />
+    </Grid>
+
+</UserControl>

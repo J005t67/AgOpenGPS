@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="AgOpenGPS.WpfApp.Configuration.ConfigPageArea"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+
+    xmlns:corevm="clr-namespace:AgOpenGPS.Core.ViewModels;assembly=AgOpenGPS.Core"
+    xmlns:local="clr-namespace:AgOpenGPS.WpfApp.Configuration"
+
+    d:DesignHeight="450" d:DesignWidth="800">
+    
+    <ContentControl x:Name="configPage"
+            Background="Black"
+            Content="{Binding SelectedPageViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type corevm:ConfigVehicleTypeViewModel}">
+                <local:ConfigVehicleTypePage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigVehicleSizeViewModel}">
+                <local:ConfigVehicleSizePage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigVehicleAntennaViewModel}">
+                <local:ConfigVehicleAntennaPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type corevm:ConfigToolTypeViewModel}">
+                <local:ConfigToolTypePage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolSizeViewModel}">
+                <local:ConfigToolSizePage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolOffsetViewModel}">
+                <local:ConfigToolOffsetPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolOverlapViewModel}">
+                <local:ConfigToolOverlapPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolSectionsViewModel}">
+                <local:ConfigToolSectionsPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolLookAheadViewModel}">
+                <local:ConfigToolLookAheadPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigToolSwitchesViewModel}">
+                <local:ConfigToolSwitchesPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type corevm:ConfigInputsAntennaViewModel}">
+                <local:ConfigInputsAntennaPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type corevm:ConfigInputsImuViewModel}">
+                <local:ConfigInputsImuPage />
+            </DataTemplate>
+
+			<DataTemplate DataType="{x:Type corevm:ConfigTurnViewModel}">
+				<local:ConfigTurnPage />
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type corevm:ConfigMachineModuleViewModel}">
+				<local:ConfigMachineModulePage />
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type corevm:ConfigSwitchesViewModel}">
+				<local:ConfigSwitchesPage />
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type corevm:ConfigTramLinesViewModel}">
+				<local:ConfigTramLinesPage />
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type corevm:ConfigViewportViewModel}">
+				<local:ConfigViewportPage />
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type corevm:ConfigButtonsViewModel}">
+				<local:ConfigButtonsPage />
+			</DataTemplate>
+
+		</ContentControl.Resources>
+    </ContentControl>
+
+</UserControl>
